@@ -1,24 +1,37 @@
 // src/components/SearchBar.tsx
 
-'use client'; // This directive makes this a client component
+'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-// We're making the SearchBar component reusable by allowing it to receive
-// a function prop from the parent component (page.tsx).
 interface SearchBarProps {
-  onSearch: (query: string) => void;
+  onSearch?: (query: string) => void;
 }
 
 export default function SearchBar({ onSearch }: SearchBarProps) {
   const [query, setQuery] = useState('');
+  const router = useRouter();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
 
   const handleSearch = () => {
-    onSearch(query);
+    if (query.trim()) {
+      if (onSearch) {
+        onSearch(query);
+      } else {
+        // Navigate to search page
+        router.push(`/search?q=${encodeURIComponent(query)}`);
+      }
+    }
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   return (
@@ -29,6 +42,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
         className="search-input"
         value={query}
         onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
       />
       <button className="search-button" onClick={handleSearch}>
         Search
