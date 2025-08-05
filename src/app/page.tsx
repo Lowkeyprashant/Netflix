@@ -13,6 +13,8 @@ interface Movie {
   poster_path: string;
   backdrop_path: string;
   overview: string;
+  vote_average: number;
+  release_date: string;
 }
 
 interface MovieList {
@@ -31,10 +33,14 @@ export default function Home() {
       const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
       
       const endpoints = [
-        { title: "Popular Movies", url: `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1` },
+        { title: "Trending Now", url: `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}` },
+        { title: "Popular on Netflix", url: `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1` },
         { title: "Top Rated", url: `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1` },
-        { title: "Now Playing", url: `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1` },
-        { title: "Upcoming", url: `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1` },
+        { title: "Action Movies", url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=28` },
+        { title: "Comedy Movies", url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=35` },
+        { title: "Horror Movies", url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=27` },
+        { title: "Romance Movies", url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=10749` },
+        { title: "Documentaries", url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=99` },
       ];
 
       try {
@@ -53,7 +59,7 @@ export default function Home() {
 
         const lists = endpoints.map((endpoint, index) => ({
           title: endpoint.title,
-          movies: allData[index].results
+          movies: allData[index].results.filter((movie: Movie) => movie.poster_path && movie.backdrop_path)
         }));
 
         setMovieLists(lists);
@@ -61,24 +67,72 @@ export default function Home() {
 
       } catch (err) {
         console.error('Error fetching movie data:', err);
-        setError("Could not fetch movies. Displaying sample data.");
+        setError("Using sample data due to API issues.");
         
-        // Fallback to hardcoded data if API call fails
+        // Enhanced fallback data with proper poster paths
         setMovieLists([
           { 
-            title: "Popular Movies", 
+            title: "Trending Now", 
             movies: [
-              { id: 763212, title: 'Lift', poster_path: '/gma8o1jWaSc6c31p94I1p2h53M6.jpg', backdrop_path: '/gQ9G67LwX2k3Kmt1hV1Qc4P21Fv.jpg', overview: "An international heist crew, led by Cyrus Whitaker, races to lift $500 million in gold from a passenger plane at 40,000 feet." },
-              { id: 609681, title: 'The Marvels', poster_path: '/9c693wV39Gq0fV0G5pB9G49L9m7.jpg', backdrop_path: '/gQ9G67LwX2k3Kmt1hV1Qc4P21Fv.jpg', overview: "Carol Danvers gets her powers entangled with those of Kamala Khan and Monica Rambeau, forcing them to work together to save the universe." },
-              { id: 872585, title: 'Oppenheimer', poster_path: '/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg', backdrop_path: '/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg', overview: "The story of J. Robert Oppenheimer's role in the development of the atomic bomb during World War II." },
+              { 
+                id: 872585, 
+                title: 'Oppenheimer', 
+                poster_path: '/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg', 
+                backdrop_path: '/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg', 
+                overview: "The story of J. Robert Oppenheimer's role in the development of the atomic bomb during World War II.",
+                vote_average: 8.3,
+                release_date: "2023-07-20"
+              },
+              { 
+                id: 346698, 
+                title: 'Barbie', 
+                poster_path: '/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg', 
+                backdrop_path: '/ctMserH8g2SeOAnCw5gFjdQF8mo.jpg', 
+                overview: "Barbie and Ken are having the time of their lives in the colorful and seemingly perfect world of Barbie Land.",
+                vote_average: 7.2,
+                release_date: "2023-07-21"
+              },
+              { 
+                id: 298618, 
+                title: 'The Flash', 
+                poster_path: '/rktDFPbfHfUbArZ6OOOKsXcv0Bm.jpg', 
+                backdrop_path: '/yF1eOkaYvwiORauRCPWznV9xVvi.jpg', 
+                overview: "Barry Allen uses his super speed to change the past, but his attempt to save his family creates a world without super heroes.",
+                vote_average: 6.8,
+                release_date: "2023-06-16"
+              },
             ]
           },
           { 
-            title: "Top Rated", 
+            title: "Popular on Netflix", 
             movies: [
-              { id: 458156, title: 'John Wick: Chapter 3 - Parabellum', poster_path: '/udDclOQ75otK1j9nKglx9f3rJKD.jpg', backdrop_path: '/gQ9G67LwX2k3Kmt1hV1Qc4P21Fv.jpg', overview: "Super-assassin John Wick returns with a $14 million price tag on his head and an army of bounty-hunting killers on his trail." },
-              { id: 299534, title: 'Avengers: Endgame', poster_path: '/or06FN3Dka5tukK1e9sl1g8tJJl.jpg', backdrop_path: '/gQ9G67LwX2k3Kmt1hV1Qc4P21Fv.jpg', overview: "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos." },
-              { id: 420817, title: 'Aladdin', poster_path: '/3iYTgCssKGgKOtQXs8CgydZKHys.jpg', backdrop_path: '/gQ9G67LwX2k3Kmt1hV1Qc4P21Fv.jpg', overview: "A kindhearted street thief and a power-hungry Grand Vizier vie for a magic lamp that has the power to make their deepest wishes come true." },
+              { 
+                id: 299534, 
+                title: 'Avengers: Endgame', 
+                poster_path: '/or06FN3Dka5tukK1e9sl1g8tJJl.jpg', 
+                backdrop_path: '/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg', 
+                overview: "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos.",
+                vote_average: 8.4,
+                release_date: "2019-04-26"
+              },
+              { 
+                id: 19995, 
+                title: 'Avatar', 
+                poster_path: '/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg', 
+                backdrop_path: '/o0s4XsEDfDlvit5pDRKjzXR4pp2.jpg', 
+                overview: "In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission.",
+                vote_average: 7.6,
+                release_date: "2009-12-18"
+              },
+              { 
+                id: 496243, 
+                title: 'Parasite', 
+                poster_path: '/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg', 
+                backdrop_path: '/TU9NIjwzjoKPwQHoHshkBcQX2wT.jpg', 
+                overview: "All unemployed, Ki-taek and his family take peculiar interest in the wealthy and glamorous Parks.",
+                vote_average: 8.5,
+                release_date: "2019-05-30"
+              },
             ]
           },
         ]);
@@ -94,19 +148,44 @@ export default function Home() {
 
   const featuredMovie = movieLists.length > 0 ? movieLists[0].movies[0] : null;
 
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-red-600 mx-auto mb-4"></div>
+          <p className="text-white text-xl">Loading Netflix...</p>
+        </div>
+      </main>
+    );
+  }
+
   return (
-    <main>
+    <main className="min-h-screen bg-black">
+      {/* Hero Section */}
       {featuredMovie && <Hero movie={featuredMovie} />}
       
-      <div className="container">
-        <SearchBar />
+      {/* Content Container */}
+      <div className="relative z-10 bg-black">
+        {/* Search Section */}
+        <div className="container pt-8">
+          <SearchBar />
+        </div>
         
-        {error && <p className="text-center my-4 text-red-500">{error}</p>}
-        {isLoading && <p className="text-center my-4 text-white">Loading movies...</p>}
+        {/* Error Message */}
+        {error && (
+          <div className="container">
+            <div className="bg-yellow-600 text-white px-4 py-3 rounded-lg mb-6">
+              <p className="font-semibold">⚠️ {error}</p>
+            </div>
+          </div>
+        )}
         
-        {movieLists.map((list) => (
-          <MovieRow key={list.title} title={list.title} movies={list.movies} />
-        ))}
+        {/* Movie Rows */}
+        <div className="pb-20">
+          {movieLists.map((list, index) => (
+            <MovieRow key={`${list.title}-${index}`} title={list.title} movies={list.movies} />
+          ))}
+        </div>
       </div>
     </main>
   );
