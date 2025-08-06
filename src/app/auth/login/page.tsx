@@ -22,8 +22,8 @@ export default function LoginPage() {
     // Simulate login - in real app, call your API
     setTimeout(() => {
       if (email && password) {
-        // Successful login - redirect directly to homepage
-        router.push('/');
+        // Successful login - redirect to profiles page
+        router.push('/profiles');
       } else {
         setMessage('Please enter valid credentials');
       }
@@ -44,13 +44,16 @@ export default function LoginPage() {
         <div className="absolute inset-0 bg-black/50"></div>
       </div>
 
-      {/* Header - Netflix Logo Only */}
+      {/* Header */}
       <header className="relative z-20 p-6 md:p-12">
         <Link href="/auth/signup">
-          {/* Netflix Wordmark Logo */}
-          <div className="text-red-600 font-black text-4xl tracking-tight hover:text-red-500 transition-colors">
-            NETFLIX
-          </div>
+          <svg className="h-12 w-auto text-red-600" viewBox="0 0 111 30" fill="currentColor">
+            <path d="M105.06 14.27L111 30c-1.75-.25-3.49-.58-5.24-.92l-3.79-8.92-3.79 8.92c-1.75.34-3.49.67-5.24.92l5.94-15.73L93.94 0h5.92l3.79 9.06L107.44 0h5.92l-8.3 14.27z"/>
+            <path d="M90.97 0L85.06 0l-8.15 12.76L68.76 0l-5.91 0l8.15 12.76L62.85 30l5.91 0l8.15-12.76L85.06 30l5.91 0L82.82 17.24z"/>
+            <path d="M42.64 0L37.73 0v18.43h15.67V14.27H42.64z"/>
+            <path d="M21.4 18.25h13.94v4.18H21.4V30h-5.91V0h19.85v4.18H21.4z"/>
+            <path d="M5.91 0v30H0V0z"/>
+          </svg>
         </Link>
       </header>
 

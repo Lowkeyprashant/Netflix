@@ -2,14 +2,14 @@
   "name": "streamifyy",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "db:push": "prisma db push",
-    "db:generate": "prisma generate"
-  },
+ "scripts": {
+  "dev": "next dev",
+  "build": "npx prisma generate && next build",
+  "start": "next start",
+  "lint": "next lint",
+  "db:push": "prisma db push",
+  "db:generate": "prisma generate"
+},
   "dependencies": {
     "@prisma/client": "^5.7.1",
     "bcryptjs": "^2.4.3",
