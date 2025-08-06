@@ -42,33 +42,9 @@ export default function PasswordPage() {
       return;
     }
 
-    try {
-      const res = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-      
-      if (res.ok) {
-        setMessage('Account created successfully! Redirecting to login...');
-        localStorage.removeItem('signupEmail');
-        setTimeout(() => {
-          router.push('/auth/login');
-        }, 2000);
-      } else {
-        setMessage(data.message || 'Failed to create account');
-      }
-
-    } catch (error) {
-      console.error(error);
-      setMessage('An error occurred. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+    // Store password and proceed to plan selection
+    localStorage.setItem('signupPassword', password);
+    router.push('/auth/signup/plan');
   };
 
   return (
