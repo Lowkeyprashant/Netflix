@@ -51,8 +51,12 @@ export default function PasswordPage() {
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
       <header className="px-12 py-5 flex justify-between items-center border-b border-gray-800">
-        <Link href="/" className="text-4xl font-bold text-red-600 hover:text-red-500">
-          STREAMIFYY
+        <Link href="/" className="focus:outline-none">
+          <img 
+            src="/images/netflix-logo.png" 
+            alt="Netflix" 
+            className="h-8 md:h-10 w-auto hover:opacity-80 transition-opacity"
+          />
         </Link>
         <Link href="/auth/login">
           <button className="text-white hover:underline text-lg font-medium">
@@ -76,7 +80,9 @@ export default function PasswordPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
+              <label htmlFor="email" className="sr-only">Email address</label>
               <input
+                id="email"
                 type="email"
                 value={email}
                 disabled
@@ -85,7 +91,9 @@ export default function PasswordPage() {
             </div>
             
             <div>
+              <label htmlFor="password" className="sr-only">Add a password</label>
               <input
+                id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -97,7 +105,9 @@ export default function PasswordPage() {
             </div>
 
             <div>
+              <label htmlFor="confirmPassword" className="sr-only">Confirm password</label>
               <input
+                id="confirmPassword"
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}

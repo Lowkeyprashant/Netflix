@@ -12,11 +12,11 @@ export default function SignupPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const router = useRouter();
 
-  // Background slideshow images
+  // Background slideshow images - using your custom images
   const backgroundSlides = [
-    'https://assets.nflxext.com/ffe/siteui/vlv3/6e32b96a-d4be-4e44-a19b-1bd8d2d1c87f/2023-11-30/IN-en-20231130-derow-perspective_alpha_website_small.jpg',
-    'https://assets.nflxext.com/ffe/siteui/vlv3/6e32b96a-d4be-4e44-a19b-1bd8d2d1c87f/2023-11-30/IN-en-20231130-popsignuptwoweeks-perspective_alpha_website_small.jpg',
-    'https://assets.nflxext.com/ffe/siteui/vlv3/6e32b96a-d4be-4e44-a19b-1bd8d2d1c87f/2023-11-30/IN-en-20231130-trifectaSignup-perspective_alpha_website_small.jpg'
+    '/images/netflix-background.jpg',
+    '/images/netflix-background.jpg',
+    '/images/netflix-background.jpg'
   ];
 
   const handleEmailSubmit = (e: React.FormEvent) => {
@@ -71,13 +71,18 @@ export default function SignupPage() {
       {/* Header */}
       <header className="absolute top-0 left-0 right-0 z-20 px-6 md:px-16 py-5 flex justify-between items-center">
         <Link href="/" className="focus:outline-none">
-          {/* Netflix Wordmark Logo */}
-          <div className="text-red-600 font-black text-4xl tracking-tight hover:text-red-500 transition-colors">
-            NETFLIX
-          </div>
+          {/* Custom Netflix Logo - Standard Size like reference image */}
+          <img 
+            src="/images/netflix-logo.png" 
+            alt="Netflix" 
+            className="h-8 md:h-10 w-auto hover:opacity-80 transition-opacity"
+          />
         </Link>
         <div className="flex items-center gap-5">
-          <select className="bg-black/40 border border-gray-400 text-white px-3 py-2 rounded text-sm">
+          <select 
+            className="bg-black/40 border border-gray-400 text-white px-3 py-2 rounded text-sm"
+            aria-label="Select language"
+          >
             <option>🌐 English</option>
             <option>🌐 हिन्दी</option>
           </select>
@@ -358,7 +363,10 @@ export default function SignupPage() {
               <a href="#" className="block hover:text-white underline">Contact Us</a>
             </div>
           </div>
-          <select className="bg-black/40 border border-gray-400 text-white px-3 py-2 rounded mb-5">
+          <select 
+            className="bg-black/40 border border-gray-400 text-white px-3 py-2 rounded mb-5"
+            aria-label="Select language"
+          >
             <option>🌐 English</option>
             <option>🌐 हिन्दी</option>
           </select>
