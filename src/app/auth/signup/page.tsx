@@ -71,11 +71,11 @@ export default function SignupPage() {
       {/* Header */}
       <header className="absolute top-0 left-0 right-0 z-20 px-6 md:px-16 py-5 flex justify-between items-center">
         <Link href="/" className="focus:outline-none">
-          {/* Custom Netflix Logo - Standard Size like reference image */}
+          {/* Bigger Netflix Logo */}
           <img 
             src="/images/netflix-logo.png" 
             alt="Netflix" 
-            className="h-8 md:h-10 w-auto hover:opacity-80 transition-opacity"
+            className="md:h-60 md:h- w-auto hover:opacity-80 transition-opacity"
           />
         </Link>
         <div className="flex items-center gap-5">
@@ -133,11 +133,11 @@ export default function SignupPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-4 text-base bg-black/70 border border-gray-500 rounded text-white placeholder-transparent peer focus:border-white focus:bg-black/90 outline-none"
+                className="w-full px-4 py-4 text-base bg-black/70 border border-gray-500 rounded text-white placeholder-transparent peer focus:border-white focus:bg-black/90 outline-none transition-all duration-300"
                 placeholder="Email address"
                 required
               />
-              <label className="absolute left-4 top-4 text-gray-400 text-base transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-white">
+              <label className="absolute left-4 top-4 text-gray-400 text-base transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-white peer-valid:top-1 peer-valid:text-xs peer-valid:text-white">
                 Email address
               </label>
             </div>
@@ -312,11 +312,11 @@ export default function SignupPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-4 text-base bg-black/70 border border-gray-500 rounded text-white placeholder-transparent peer focus:border-white focus:bg-black/90 outline-none"
+                  className="w-full px-4 py-4 text-base bg-black/70 border border-gray-500 rounded text-white placeholder-transparent peer focus:border-white focus:bg-black/90 outline-none transition-all duration-300"
                   placeholder="Email address"
                   required
                 />
-                <label className="absolute left-4 top-4 text-gray-400 text-base transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-white">
+                <label className="absolute left-4 top-4 text-gray-400 text-base transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-white peer-valid:top-1 peer-valid:text-xs peer-valid:text-white">
                   Email address
                 </label>
               </div>

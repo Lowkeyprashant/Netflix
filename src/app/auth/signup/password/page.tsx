@@ -50,12 +50,12 @@ export default function PasswordPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className="px-12 py-5 flex justify-between items-center border-b border-gray-800">
-        <Link href="/" className="focus:outline-none">
+      <header className="px-12 py-6 flex justify-between items-center border-b border-gray-800 h-24">
+        <Link href="/" className="focus:outline-none flex items-center">
           <img 
             src="/images/netflix-logo.png" 
             alt="Netflix" 
-            className="h-8 md:h-10 w-auto hover:opacity-80 transition-opacity"
+            className="md:h-60 md:h-70 w-auto hover:opacity-80 transition-opacity"
           />
         </Link>
         <Link href="/auth/login">
@@ -86,7 +86,7 @@ export default function PasswordPage() {
                 type="email"
                 value={email}
                 disabled
-                className="w-full px-4 py-4 text-lg bg-gray-800 border border-gray-600 rounded text-gray-400 cursor-not-allowed"
+                className="w-full px-4 py-4 text-lg bg-gray-800/50 border border-gray-600 rounded text-gray-300 cursor-not-allowed backdrop-blur-sm"
               />
             </div>
             
@@ -98,7 +98,7 @@ export default function PasswordPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Add a password"
-                className="w-full px-4 py-4 text-lg bg-gray-800 border border-gray-600 rounded text-white placeholder-gray-400 focus:border-white focus:bg-gray-700 outline-none"
+                className="w-full px-4 py-4 text-lg bg-transparent border border-gray-600 rounded text-white placeholder-gray-400 focus:border-white focus:bg-black/20 outline-none transition-all duration-300 backdrop-blur-sm"
                 required
                 minLength={6}
               />
@@ -112,7 +112,7 @@ export default function PasswordPage() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm password"
-                className="w-full px-4 py-4 text-lg bg-gray-800 border border-gray-600 rounded text-white placeholder-gray-400 focus:border-white focus:bg-gray-700 outline-none"
+                className="w-full px-4 py-4 text-lg bg-transparent border border-gray-600 rounded text-white placeholder-gray-400 focus:border-white focus:bg-black/20 outline-none transition-all duration-300 backdrop-blur-sm"
                 required
                 minLength={6}
               />
